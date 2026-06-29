@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PHLAME — Vente privée</title>
+<meta name="description" content="Vente privée PHLAME — bougies, diffuseurs et sprays artisanaux. Composez votre commande." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --cream:#EDE5DC; --cream-lt:#F5EEE1; --ivory:#FBF7EF;
+    --brown:#5A4636; --brown-deep:#3B2A1A; --dark:#150D06; --dark2:#1B120A;
+    --gold:#C9A24D; --gold-br:#E3C684; --gold-deep:#A07D36;
+    --on-dark:#F2E7D4; --on-dark-mut:#C7B394; --mut:#6E5942; --line:#E4D6BD;
+    --display:'Playfair Display', Georgia, serif;
+    --body:'Lora', Georgia, serif;
+    --label:'Jost','Lora',sans-serif;
+    --shadow:0 18px 50px -28px rgba(59,42,26,.55);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--body); color:var(--brown); background:var(--cream);
+    line-height:1.65; -webkit-font-smoothing:antialiased;
+    background-image:
+      radial-gradient(1200px 600px at 50% -10%, rgba(201,162,77,.10), transparent 60%),
+      radial-gradient(900px 500px at 110% 20%, rgba(201,162,77,.06), transparent 55%);
+  }
+  .wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+  .kicker{font-family:var(--label);text-transform:uppercase;letter-spacing:.34em;
+    font-size:12px;color:var(--gold-deep);font-weight:400}
+  .star{color:var(--gold);margin:0 .5em;font-size:.85em}
+  h1,h2,h3{font-family:var(--display);color:var(--brown-deep);font-weight:600;line-height:1.12}
+
+  /* ---------- HERO ---------- */
+  .hero{background:linear-gradient(180deg,var(--dark) 0%, var(--dark2) 100%);
+    color:var(--on-dark);text-align:center;padding:72px 24px 64px;position:relative;overflow:hidden}
+  .hero::after{content:"";position:absolute;inset:14px;border:1px solid rgba(201,162,77,.32);
+    pointer-events:none}
+  .hero .kicker{color:var(--gold-br)}
+  .hero h1{color:var(--on-dark);font-size:clamp(46px,11vw,104px);letter-spacing:.22em;
+    font-weight:700;margin:.18em 0 .06em;padding-left:.22em}
+  .hero .sub{font-style:italic;color:var(--on-dark-mut);font-size:clamp(16px,2.4vw,21px)}
+  .hero .pill{display:inline-block;margin-top:26px;border:1px solid var(--gold);
+    color:var(--gold-br);font-family:var(--label);text-transform:uppercase;letter-spacing:.28em;
+    font-size:12px;padding:11px 26px;border-radius:999px}
+  .rule{width:54px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);
+    margin:18px auto;border:0}
+  .rule.dark{background:linear-gradient(90deg,transparent,var(--gold-br),transparent)}
+
+  /* ---------- TEST NOTICE ---------- */
+  .notice{background:var(--brown-deep);color:var(--on-dark);padding:22px 24px}
+  .notice .wrap{display:flex;gap:18px;align-items:flex-start;justify-content:center;flex-wrap:wrap;text-align:left}
+  .notice b{color:var(--gold-br);font-weight:600}
+  .notice ul{list-style:none;max-width:760px;font-size:14.5px;color:var(--on-dark-mut)}
+  .notice li{margin:.28em 0;padding-left:1.4em;position:relative}
+  .notice li::before{content:"\2726";color:var(--gold);position:absolute;left:0;font-size:.8em;top:.25em}
+  .notice .vip{color:var(--on-dark)}
+
+  /* ---------- SECTION HEAD ---------- */
+  section{padding:54px 0}
+  .sec-head{text-align:center;margin-bottom:30px}
+  .sec-head h2{font-size:clamp(28px,5vw,42px);letter-spacing:.14em}
+  .sec-head p{color:var(--mut);font-style:italic;max-width:620px;margin:10px auto 0}
+
+  /* ---------- PRODUCT CARD ---------- */
+  .card{background:var(--cream-lt);border:1px solid var(--line);border-radius:6px;
+    box-shadow:var(--shadow);overflow:hidden;margin-bottom:30px;
+    display:grid;grid-template-columns:300px 1fr}
+  .card .visual{background:linear-gradient(165deg,var(--dark) 0%,var(--dark2) 100%);
+    color:var(--on-dark);display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:14px;padding:30px 20px;position:relative}
+  .card .visual::after{content:"";position:absolute;inset:12px;border:1px solid rgba(201,162,77,.28)}
+  .card .visual svg{width:88px;height:108px}
+  .card .visual .vlabel{font-family:var(--label);text-transform:uppercase;letter-spacing:.28em;
+    font-size:10.5px;color:var(--on-dark-mut)}
+  .card .body{padding:26px 28px 28px}
+  .card .body .pname{font-family:var(--display);font-size:25px;color:var(--brown-deep)}
+  .card .body .pdesc{color:var(--mut);font-style:italic;font-size:15px;margin:4px 0 12px}
+  .price{display:flex;gap:18px;align-items:baseline;flex-wrap:wrap;margin-bottom:16px;
+    padding-bottom:14px;border-bottom:1px solid var(--line)}
+  .price .u{font-family:var(--display);font-size:22px;color:var(--brown-deep);font-weight:600}
+  .price .l{font-family:var(--label);text-transform:uppercase;letter-spacing:.12em;font-size:12px;
+    color:var(--gold-deep)}
+  .price .l b{color:var(--brown-deep);font-weight:600;font-size:14px;font-family:var(--display)}
+
+  /* ---------- LINES ---------- */
+  .lines{display:flex;flex-direction:column;gap:10px}
+  .line{display:flex;gap:10px;align-items:center}
+  .sel{position:relative;flex:1 1 0;min-width:120px}
+  select{width:100%;appearance:none;font-family:var(--body);font-size:15px;color:var(--brown-deep);
+    background:var(--ivory);border:1px solid var(--line);border-radius:4px;padding:11px 34px 11px 13px;
+    cursor:pointer;transition:border-color .2s, box-shadow .2s}
+  select:hover{border-color:var(--gold)}
+  select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,162,77,.16)}
+  .sel::after{content:"";position:absolute;right:14px;top:50%;width:7px;height:7px;
+    border-right:1.5px solid var(--gold-deep);border-bottom:1.5px solid var(--gold-deep);
+    transform:translateY(-65%) rotate(45deg);pointer-events:none}
+  .sel.color{flex:0 0 168px}
+  .sel.hidden{display:none}
+  .rm{flex:0 0 auto;width:34px;height:34px;border-radius:999px;border:1px solid var(--line);
+    background:var(--ivory);color:var(--gold-deep);font-size:20px;line-height:1;cursor:pointer;
+    transition:.18s;display:flex;align-items:center;justify-content:center}
+  .rm:hover{border-color:var(--gold-deep);background:var(--gold);color:#fff}
+  .add{margin-top:12px;background:none;border:1px dashed var(--gold);color:var(--gold-deep);
+    font-family:var(--label);text-transform:uppercase;letter-spacing:.16em;font-size:12px;
+    padding:10px 18px;border-radius:999px;cursor:pointer;transition:.2s}
+  .add:hover{background:var(--gold);color:#fff;border-style:solid}
+  .add span{font-size:15px;margin-right:6px}
+
+  /* ---------- FORM ---------- */
+  .panel{background:var(--cream-lt);border:1px solid var(--line);border-radius:6px;
+    box-shadow:var(--shadow);padding:30px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .field{display:flex;flex-direction:column;gap:5px}
+  .field.full{grid-column:1/-1}
+  label.lab{font-family:var(--label);text-transform:uppercase;letter-spacing:.16em;font-size:11px;
+    color:var(--gold-deep)}
+  input,textarea.ad{font-family:var(--body);font-size:15px;color:var(--brown-deep);background:var(--ivory);
+    border:1px solid var(--line);border-radius:4px;padding:11px 13px;transition:.2s;width:100%;resize:vertical}
+  input:focus,textarea.ad:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,162,77,.16)}
+  .check{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--mut);cursor:pointer;margin-top:4px}
+  .check input{width:auto}
+
+  /* ---------- SUMMARY + MAIL ---------- */
+  .order{background:linear-gradient(180deg,var(--dark) 0%,var(--dark2) 100%);color:var(--on-dark);
+    border-radius:6px;box-shadow:var(--shadow);padding:32px;border:1px solid rgba(201,162,77,.3)}
+  .order h3{color:var(--on-dark);font-size:24px;letter-spacing:.06em}
+  .order .empty{color:var(--on-dark-mut);font-style:italic}
+  .sumprod{margin:14px 0;padding-bottom:12px;border-bottom:1px solid rgba(201,162,77,.18)}
+  .sumprod .ph{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+  .sumprod .ph .n{font-family:var(--display);font-size:17px;color:var(--gold-br)}
+  .sumprod .ph .s{font-family:var(--display);font-size:17px;color:var(--on-dark)}
+  .sumprod ul{list-style:none;margin-top:6px}
+  .sumprod li{font-size:14px;color:var(--on-dark-mut);padding-left:1.1em;position:relative}
+  .sumprod li::before{content:"\2013";position:absolute;left:0;color:var(--gold)}
+  .total{display:flex;justify-content:space-between;align-items:baseline;margin-top:8px;
+    font-family:var(--display)}
+  .total .tl{font-size:14px;text-transform:uppercase;letter-spacing:.18em;font-family:var(--label);color:var(--on-dark-mut)}
+  .total .tv{font-size:26px;color:var(--gold-br);font-weight:700}
+  .mailbox{margin-top:22px}
+  .mailbox textarea{width:100%;min-height:230px;background:rgba(245,238,225,.96);color:var(--brown-deep);
+    border:1px solid var(--gold-deep);border-radius:4px;padding:14px;font-family:'Lora',serif;font-size:13px;
+    line-height:1.55;resize:vertical;white-space:pre}
+  .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
+  .btn{font-family:var(--label);text-transform:uppercase;letter-spacing:.18em;font-size:12.5px;
+    padding:14px 26px;border-radius:999px;cursor:pointer;border:1px solid var(--gold);transition:.2s;text-decoration:none;display:inline-block}
+  .btn.primary{background:var(--gold);color:var(--dark);border-color:var(--gold);font-weight:500}
+  .btn.primary:hover{background:var(--gold-br);box-shadow:0 10px 24px -10px rgba(201,162,77,.6)}
+  .btn.ghost{background:transparent;color:var(--on-dark)}
+  .btn.ghost:hover{background:rgba(201,162,77,.16)}
+  .btn.disabled{opacity:.4;pointer-events:none}
+  .hint{font-size:13px;color:var(--gold-br);margin-top:10px;min-height:1.2em;font-style:italic}
+
+  /* ---------- FOOTER ---------- */
+  footer{text-align:center;padding:40px 24px 56px;color:var(--mut)}
+  footer .fp{font-family:var(--label);text-transform:uppercase;letter-spacing:.3em;font-size:12px}
+  footer a{color:var(--gold-deep)}
+
+  /* ---------- reveal ---------- */
+  .rv{opacity:0;transform:translateY(16px);animation:rv .8s ease forwards}
+  @keyframes rv{to{opacity:1;transform:none}}
+
+  @media(max-width:720px){
+    .card{grid-template-columns:1fr}
+    .card .visual{flex-direction:row;padding:22px}
+    .card .visual svg{width:54px;height:66px}
+    .grid2{grid-template-columns:1fr}
+    .sel.color{flex:1 1 0}
+    .order,.panel{padding:22px}
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap rv">
+    <div class="kicker">Fait main <span class="star">&#10022;</span> Créé avec amour <span class="star">&#10022;</span> Cholet, France</div>
+    <h1>PHLAME</h1>
+    <div class="sub">Vente privée &mdash; composez votre commande</div>
+    <div class="pill">Prix réduits &middot; à l'unité ou en lot de 2</div>
+  </div>
+</header>
+
+<!-- TEST NOTICE -->
+<div class="notice">
+  <div class="wrap">
+    <ul>
+      <li><b>Produits test.</b> Cette vente privée propose des créations en phase de test &mdash; les <b>dosages de parfum sont en cours d'ajustement</b>.</li>
+      <li>Pour les <b>vraies ventes</b> à venir, les <b>tailles des produits seront plus généreuses</b> (contenances supérieures).</li>
+      <li class="vip">En commandant aujourd'hui, vous devenez <b>client VIP</b> &mdash; accès prioritaire à nos prochaines ventes privées.</li>
+      <li>Une question&nbsp;? Écrivez-nous à <b>societe@phlame.fr</b>.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- INTRO -->
+<section style="padding-bottom:18px">
+  <div class="wrap sec-head">
+    <div class="kicker">L'atelier vous ouvre ses portes</div>
+    <hr class="rule" />
+    <h2>NOS CRÉATIONS</h2>
+    <p>Choisissez une senteur par article, ajoutez-en autant que vous le souhaitez avec le bouton «&nbsp;+&nbsp;». Pour les bougies, sélectionnez aussi le colorant. Votre récapitulatif et votre e-mail de commande se préparent automatiquement en bas de page.</p>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section style="padding-top:6px">
+  <div class="wrap" id="products"></div>
+</section>
+
+<!-- CLIENT FORM -->
+<section style="background:rgba(201,162,77,.05)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Vos coordonnées</div>
+      <hr class="rule" />
+      <h2>LIVRAISON &amp; FACTURATION</h2>
+    </div>
+    <div class="panel">
+      <div class="grid2">
+        <div class="field"><label class="lab" for="prenom">Prénom</label><input id="prenom" autocomplete="given-name" /></div>
+        <div class="field"><label class="lab" for="nom">Nom</label><input id="nom" autocomplete="family-name" /></div>
+        <div class="field"><label class="lab" for="email">E-mail</label><input id="email" type="email" autocomplete="email" /></div>
+        <div class="field"><label class="lab" for="tel">Téléphone</label><input id="tel" type="tel" autocomplete="tel" /></div>
+        <div class="field full"><label class="lab" for="liv">Adresse de livraison</label><textarea class="ad" id="liv" rows="2" autocomplete="shipping street-address" placeholder="N°, rue, code postal, ville"></textarea></div>
+        <div class="field full">
+          <label class="check"><input type="checkbox" id="sameAddr" checked /> Adresse de facturation identique à la livraison</label>
+        </div>
+        <div class="field full" id="facWrap" style="display:none"><label class="lab" for="fac">Adresse de facturation</label><textarea class="ad" id="fac" rows="2" autocomplete="billing street-address" placeholder="N°, rue, code postal, ville"></textarea></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORDER SUMMARY + MAIL -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Dernière étape</div>
+      <hr class="rule" />
+      <h2>VOTRE COMMANDE</h2>
+      <p>Vérifiez le récapitulatif, puis envoyez-nous votre e-mail pré-rempli (ou copiez-le). Nous revenons vers vous pour confirmer.</p>
+    </div>
+    <div class="order">
+      <h3>Récapitulatif</h3>
+      <div id="summary"><p class="empty">Aucun article pour le moment &mdash; choisissez vos senteurs ci-dessus.</p></div>
+      <div class="total" id="totalRow" style="display:none">
+        <span class="tl">Total estimé</span><span class="tv" id="totalVal">0,00 €</span>
+      </div>
+
+      <div class="mailbox">
+        <label class="lab" style="color:var(--gold-br);display:block;margin-bottom:8px">E-mail de commande (prêt à envoyer)</label>
+        <textarea id="mail" readonly spellcheck="false"></textarea>
+        <div class="actions">
+          <a class="btn primary disabled" id="sendBtn" href="#">Ouvrir dans ma messagerie</a>
+          <button class="btn ghost" id="copyBtn" type="button">Copier l'e-mail</button>
+        </div>
+        <div class="hint" id="hint"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <hr class="rule" />
+  <div class="fp">PHLAME &nbsp;&middot;&nbsp; Maison de bougies artisanales &nbsp;&middot;&nbsp; Cholet, France</div>
+  <p style="margin-top:8px;font-size:14px">Vente privée de produits test &middot; <a href="mailto:societe@phlame.fr">societe@phlame.fr</a></p>
+</footer>
+
+<script>
+const RECIPIENT = "societe@phlame.fr";
+const SCENTS_ALL = ["Ambre & Safran","Attrape-Rêve","Coco & Papaye","Fleur de Coton","Fleur de Sakura","Fleur de Tiaré","Vanille des Îles","Patchouli","Monoï des Îles","Brioche au Beurre","Cerise Noire Explosive","Bois de Gaïac","Soleil d'Azur","Pastèque Melon","Mojito"];
+const COLORS = ["Sans colorant","Rouge","Mûre","Noir","Jaune"];
+const NO_BOUGIE = ["Brioche au Beurre","Cerise Noire Explosive"];
+
+const SVG = {
+  bougie:'<svg viewBox="0 0 80 100" fill="none" stroke="#C9A24D" stroke-width="1.6"><path d="M40 14c5 6 5 11 0 15-5-4-5-9 0-15z" fill="#E3C684" stroke="none"/><line x1="40" y1="30" x2="40" y2="40"/><rect x="24" y="40" width="32" height="46" rx="3"/><line x1="24" y1="52" x2="56" y2="52"/></svg>',
+  kheops:'<svg viewBox="0 0 80 100" fill="none" stroke="#C9A24D" stroke-width="1.6"><line x1="40" y1="10" x2="40" y2="26"/><path d="M30 22h20" /><path d="M28 30c0-3 3-4 12-4s12 1 12 4l3 40c0 6-6 10-15 10s-15-4-15-10z"/><line x1="30" y1="46" x2="50" y2="46"/></svg>',
+  spray:'<svg viewBox="0 0 80 100" fill="none" stroke="#C9A24D" stroke-width="1.6"><rect x="30" y="12" width="16" height="10" rx="2"/><path d="M46 16h10"/><path d="M32 22h12l3 12H29z"/><rect x="29" y="34" width="22" height="50" rx="4"/><line x1="29" y1="50" x2="51" y2="50"/></svg>',
+  he:'<svg viewBox="0 0 80 100" fill="none" stroke="#C9A24D" stroke-width="1.6"><path d="M34 12l-3 8M40 10v10M46 12l3 8" stroke-linecap="round"/><rect x="28" y="40" width="24" height="46" rx="4"/><path d="M34 40c0-6 0-10 6-10s6 4 6 10"/><line x1="28" y1="56" x2="52" y2="56"/></svg>'
+};
+
+const PRODUCTS = [
+  {id:'bougie', name:'Bougie parfumée', unit:8.00, lot:14.00, color:true,
+   desc:'Cire végétale de soja et colza, coulée à la main, mèche en coton non traité.',
+   scents:SCENTS_ALL.filter(s=>!NO_BOUGIE.includes(s))},
+  {id:'kheops', name:'Diffuseur voiture · Kheops', unit:9.50, lot:17.00, color:false,
+   desc:'Le parfum PHLAME qui vous accompagne sur la route.',
+   scents:SCENTS_ALL.slice()},
+  {id:'spray', name:"Spray d'ambiance", unit:5.00, lot:8.00, color:false,
+   desc:'Une brume parfumée pour la maison et les textiles.',
+   scents:SCENTS_ALL.slice()},
+  {id:'he', name:"Diffuseur d'huiles essentielles", unit:29.00, lot:53.50, color:false,
+   desc:'Diffusion douce et continue à bâtonnets, pour une ambiance apaisante.',
+   scents:['Coco & Papaye','Monoï des Îles']}
+];
+
+const eur = n => n.toFixed(2).replace('.',',') + ' €';
+const opt = (v,label) => `<option value="${v}">${label||v}</option>`;
+const el = id => document.getElementById(id);
+
+// ---- build product cards ----
+const wrapEl = el('products');
+PRODUCTS.forEach((p,i)=>{
+  const scentOpts = opt('','Choisir une senteur…') + p.scents.map(s=>opt(s)).join('');
+  const card = document.createElement('div');
+  card.className='card rv';
+  card.style.animationDelay = (0.05*i)+'s';
+  card.innerHTML = `
+    <div class="visual">${SVG[p.id]}<div class="vlabel">Visuel à venir</div></div>
+    <div class="body">
+      <div class="pname">${p.name}</div>
+      <div class="pdesc">${p.desc}</div>
+      <div class="price">
+        <span class="u">${eur(p.unit)}</span>
+        <span class="l">l'unité</span>
+        <span class="l">lot de 2&nbsp;: <b>${eur(p.lot)}</b></span>
+      </div>
+      <div class="lines" data-prod="${p.id}"></div>
+      <button class="add" type="button" data-add="${p.id}"><span>+</span>Ajouter une senteur</button>
+    </div>`;
+  wrapEl.appendChild(card);
+  card.querySelector('.add').addEventListener('click',()=>addLine(p));
+  addLine(p); // une ligne par défaut
+});
+
+function addLine(p){
+  const cont = document.querySelector(`.lines[data-prod="${p.id}"]`);
+  const scentOpts = opt('','Choisir une senteur…') + p.scents.map(s=>opt(s)).join('');
+  const colorOpts = opt('','Couleur ?') + COLORS.map(c=>opt(c)).join('');
+  const line = document.createElement('div');
+  line.className='line';
+  line.innerHTML = `
+    <div class="sel"><select class="scent">${scentOpts}</select></div>
+    ${p.color?`<div class="sel color hidden"><select class="color">${colorOpts}</select></div>`:''}
+    <button class="rm" type="button" title="Retirer cette ligne">&minus;</button>`;
+  cont.appendChild(line);
+  const scentSel = line.querySelector('.scent');
+  scentSel.addEventListener('change',()=>{
+    if(p.color){
+      const cs = line.querySelector('.sel.color');
+      cs.classList.toggle('hidden', !scentSel.value);
+    }
+    recompute();
+  });
+  if(p.color) line.querySelector('.color').addEventListener('change',recompute);
+  line.querySelector('.rm').addEventListener('click',()=>{
+    if(cont.querySelectorAll('.line').length>1) line.remove();
+    else { scentSel.value=''; if(p.color){line.querySelector('.sel.color').classList.add('hidden');line.querySelector('.color').value='';} }
+    recompute();
+  });
+  recompute();
+}
+
+// ---- billing toggle ----
+el('sameAddr').addEventListener('change',e=>{
+  el('facWrap').style.display = e.target.checked ? 'none':'block';
+  recompute();
+});
+['prenom','nom','email','tel','liv','fac'].forEach(id=> el(id).addEventListener('input',recompute));
+
+// ---- compute summary + mail ----
+function collect(){
+  const order=[]; let total=0;
+  PRODUCTS.forEach(p=>{
+    const items=[];
+    document.querySelectorAll(`.lines[data-prod="${p.id}"] .line`).forEach(line=>{
+      const s=line.querySelector('.scent').value;
+      if(!s) return;
+      let col=null;
+      if(p.color){ col=line.querySelector('.color').value; if(!col) return; }
+      items.push({scent:s,color:col});
+    });
+    if(items.length){
+      const n=items.length;
+      const sub=Math.floor(n/2)*p.lot + (n%2)*p.unit;
+      total+=sub;
+      order.push({p,items,sub});
+    }
+  });
+  return {order,total};
+}
+
+function recompute(){
+  const {order,total}=collect();
+  const sum=el('summary'), tr=el('totalRow');
+  if(!order.length){
+    sum.innerHTML='<p class="empty">Aucun article pour le moment &mdash; choisissez vos senteurs ci-dessus.</p>';
+    tr.style.display='none';
+  } else {
+    sum.innerHTML = order.map(o=>{
+      const lis=o.items.map(it=>`<li>${it.scent}${it.color?` &middot; <em>colorant&nbsp;: ${it.color}</em>`:''}</li>`).join('');
+      const lotTxt = o.items.length>=2 ? ' <span style="font-size:12px;color:var(--gold)">(lot de 2 appliqué)</span>' : '';
+      return `<div class="sumprod"><div class="ph"><span class="n">${o.p.name} &times;${o.items.length}</span><span class="s">${eur(o.sub)}</span></div><ul>${lis}</ul><div style="text-align:right;font-size:12px;color:var(--on-dark-mut)">${lotTxt}</div></div>`;
+    }).join('');
+    tr.style.display='flex';
+    el('totalVal').textContent=eur(total);
+  }
+  buildMail(order,total);
+}
+
+function buildMail(order,total){
+  const v=id=>el(id).value.trim();
+  const same=el('sameAddr').checked;
+  const fac = same ? 'Identique à la livraison' : (v('fac')||'(non renseignée)');
+  const L=[];
+  L.push('Bonjour PHLAME,');
+  L.push('');
+  L.push('Je souhaite passer commande dans le cadre de la vente privée (produits test).');
+  L.push('');
+  L.push('======================================');
+  L.push('  CLIENT');
+  L.push('======================================');
+  L.push('Prénom   : '+(v('prenom')||'—'));
+  L.push('Nom      : '+(v('nom')||'—'));
+  L.push('E-mail   : '+(v('email')||'—'));
+  L.push('Téléphone: '+(v('tel')||'—'));
+  L.push('');
+  L.push('Adresse de livraison :');
+  L.push('  '+((v('liv')||'—').replace(/\n/g,'\n  ')));
+  L.push('Adresse de facturation :');
+  L.push('  '+fac.replace(/\n/g,'\n  '));
+  L.push('');
+  L.push('======================================');
+  L.push('  COMMANDE');
+  L.push('======================================');
+  if(!order.length){
+    L.push('(aucun article sélectionné)');
+  } else {
+    order.forEach(o=>{
+      L.push('');
+      L.push('• '+o.p.name+'  ('+o.items.length+' article'+(o.items.length>1?'s':'')+') — '+eur(o.sub)+(o.items.length>=2?'  [lot de 2 appliqué]':''));
+      o.items.forEach((it,idx)=>{
+        L.push('    '+(idx+1)+'. '+it.scent+(it.color?'  | colorant : '+it.color:''));
+      });
+    });
+    L.push('');
+    L.push('--------------------------------------');
+    L.push('TOTAL ESTIMÉ : '+eur(total));
+  }
+  L.push('');
+  L.push('======================================');
+  L.push('  À NOTER');
+  L.push('======================================');
+  L.push('- Produits test, dosages de parfum en cours d\'ajustement.');
+  L.push('- Les tailles seront plus généreuses pour les vraies ventes.');
+  L.push('- Je comprends que cette commande me place en client VIP pour les prochaines ventes privées.');
+  L.push('');
+  L.push('Merci !');
+  const body=L.join('\n');
+  el('mail').value=body;
+
+  // bouton + validation
+  const okItems=order.length>0;
+  const okClient = v('nom') && v('email');
+  const sendBtn=el('sendBtn'), hint=el('hint');
+  if(okItems && okClient){
+    const subject='Commande vente privée PHLAME — '+(v('prenom')+' '+v('nom')).trim();
+    sendBtn.href='mailto:'+RECIPIENT+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+    sendBtn.classList.remove('disabled');
+    hint.textContent='';
+  } else {
+    sendBtn.href='#';
+    sendBtn.classList.add('disabled');
+    hint.textContent = !okItems ? 'Ajoutez au moins une senteur (et le colorant pour les bougies).'
+                                : 'Renseignez au moins votre nom et votre e-mail pour activer l\'envoi.';
+  }
+}
+
+el('copyBtn').addEventListener('click',async()=>{
+  const ta=el('mail'); ta.select();
+  try{ await navigator.clipboard.writeText(ta.value); }
+  catch(e){ document.execCommand('copy'); }
+  const h=el('hint'); h.textContent='E-mail copié ! Collez-le dans votre messagerie, destinataire : '+RECIPIENT;
+  setTimeout(()=>{ if(h.textContent.startsWith('E-mail copié')) recompute(); },3500);
+});
+
+recompute();
+</script>
+</body>
+</html>
