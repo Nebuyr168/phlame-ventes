@@ -294,8 +294,8 @@ const PRODUCTS = [
   {id:'spray', name:"Spray d'ambiance", unit:5.00, lot:8.00, color:false,
    desc:'Une brume parfumée pour la maison et les textiles.',
    scents:SCENTS_ALL.slice()},
-  {id:'he', name:"Diffuseur d'huiles essentielles", unit:29.00, lot:53.50, color:false,
-   desc:'Diffusion douce et continue à bâtonnets, pour une ambiance apaisante.',
+  {id:'he', name:"Diffuseur d'huiles essentielles", unit:10.00, lot:16.00, color:false,
+   desc:'Diffusion douce et continue à bâtonnets, pour une ambiance apaisante. Pot à taille réelle (déjà au format des vraies ventes).',
    scents:['Coco & Papaye','Monoï des Îles']}
 ];
 
@@ -372,7 +372,7 @@ function collect(){
       const s=line.querySelector('.scent').value;
       if(!s) return;
       let col=null;
-      if(p.color){ col=line.querySelector('.color').value; if(!col) return; }
+      if(p.color){ col=line.querySelector('.color').value || 'à préciser'; }
       items.push({scent:s,color:col});
     });
     if(items.length){
@@ -444,11 +444,11 @@ function buildMail(order,total){
   }
   L.push('');
   L.push('======================================');
-  L.push('  À NOTER');
+  L.push('  JE SUIS AU COURANT QUE');
   L.push('======================================');
-  L.push('- Produits test, dosages de parfum en cours d\'ajustement.');
-  L.push('- Les tailles seront plus généreuses pour les vraies ventes.');
-  L.push('- Je comprends que cette commande me place en client VIP pour les prochaines ventes privées.');
+  L.push('- Ce sont des produits test (dosages de parfum en cours d\'ajustement).');
+  L.push('- Les tailles seront plus généreuses pour les vraies ventes (sauf le diffuseur d\'huiles essentielles, déjà à taille réelle).');
+  L.push('- Cette commande me place en client VIP pour les prochaines ventes privées.');
   L.push('');
   L.push('Merci !');
   const body=L.join('\n');
